@@ -1,0 +1,16 @@
+﻿<h2>Adaugare articol</h2>
+<br />
+<form method="post" action="/Articles/New">
+
+    <label>Titlul articolului</label>
+    <input type="text" name="Title">
+    <br />
+    <br />
+    <label>Continutul articolului</label>
+    <input type="text" name="Content">
+    <br />
+    <br />
+    <input type="hidden" name="Date" value="@DateTime.Now" />
+    <br />
+    <button class="btn btn-outline-success">Posteaza</button>
+</form>

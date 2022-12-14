@@ -1,0 +1,19 @@
+﻿@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit post</h2>
+<br />
+
+<form method="post" action="/GroupMessages/Edit/@ViewBag.GroupMessage.MessageId">
+
+    <label>Write your message here</label>
+    <br />
+
+    <textarea name="Content">@ViewBag.GroupMessage.Content</textarea>
+    <br />
+
+    <button class="btn  btn-primary" type="submit">Edit the post here</button>
+
+</form>
+
