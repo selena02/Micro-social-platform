@@ -1,0 +1,24 @@
+﻿@model Micro_social_platform.Models.Group
+
+<form method="post" action="/Groups/New">
+    <br />
+    <div class="card ">
+        <div class="card-header text-center" style="font-family: 'Trocchi', serif; font-size:30px">
+           Create group
+        </div>
+        <div class="card-body">
+            <blockquote class="blockquote mb-0">
+                @Html.Label("Name","Give your group a title")
+                @Html.TextBox("Name", null, new { @class = "form-control " })
+                @Html.ValidationMessageFor(m => m.Name, null, new {@class = "text-danger" })
+                <br /><br />
+                @Html.Label("Description", "Group description ")
+                @Html.TextArea("Description", null, new { @class = "form-control" })
+                @Html.ValidationMessage("Description", null, new { @class ="text-danger" })
+                <br />
+                <br />
+                <button class="btn btn-outline-success">Create</button>
+            </blockquote>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,51 @@
+﻿@model Micro_social_platform.Models.Profile
+
+<div class="d-flex justify-content-center">
+ 
+    @if (ViewBag.AfisareButoane == true && Model.UserId == ViewBag.UserCurent || ViewBag.EsteAdmin == true)
+    {
+        <a class="btn btn-outline-info" style=" border-radius: 25px;" href="/Profiles/Edit/@Model.ProfileId">Edit this profile</a>
+        <form method="post" action=/Profiles/Delete/@Model.ProfileId>
+            <button class="btn btn-outline-danger" style=" border-radius: 25px;" type="submit">Delete profile</button>
+        </form>
+    }
+</div>
+<br />
+@if (ViewBag.AreProfil==true){
+
+@if (ViewBag.Profile.IsPrivate == false || Model.UserId == ViewBag.UserCurent || ViewBag.AreFriends==true)
+{
+        <div class="card" style="background-color:#f5f6fa">
+            <h5 class="card-header" style="font-family: 'Trocchi', serif;">@Model.User.UserName</h5>
+        <div class="card-body">
+            <br />
+            <br />
+                <img style="width:200px; border-radius: 25px;" src="@Model.ProfilePicture" class="card-img-top" />
+            <br />
+            <br />
+                <h5 class="card-title"  style=" font-family: 'Trocchi' , serif;">@Model.FirstName  @Model.LastName</h5>
+                <p><i class="bi bi-geo"></i> @Model.Description</p>
+                <p><i class="bi bi-calendar-check"></i> Has joined us at: @Model.JoinDate</p>
+   
+        </div>
+    </div>
+}
+else
+{
+    <div class="card">
+        <div class="card-body">
+                <p class="text-danger">This account is private</p>  
+                <h3 class="card-title py-3 px-3 rounded-2"><i class="bi bi-person-fill"></i>@Model.User.UserName</h3>
+                 <br >
+                <img style="width:150px; border-radius: 25px;" src="@Model.ProfilePicture" class="card-img-top">
+                <br />
+                <br />
+            </div>
+            <br />      
+    </div>
+}
+}
+else
+{
+    <h1 class="display-4" style="font-family: 'Trocchi', serif;">Holy guacamole! This user does not have a profile.</h1>
+}

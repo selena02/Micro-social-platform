@@ -1,0 +1,23 @@
+﻿@if (ViewBag.Msg != null)
+{
+    <div class="alert alert-success" role="alert">
+        @ViewBag.Msg
+    </div>
+}
+@foreach(var user in ViewBag.Users)
+{
+    <div class="card text-center" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">@user.ApplicationUser.UserName</h5>
+            <a href="/UserGroups/RemoveAdminGroup/@user.Id" style=" border-radius: 25px;" class="btn btn-outline-danger">Remove from group</a>
+        </div>
+    </div>
+    <br />
+}
+@if(ViewBag.NoMembers==true)
+{
+
+    <h1 class="display-4" style="font-family: 'Trocchi', serif;">Holy guacamole! This group has no members.</h1>
+    <br />
+    <a class="btn btn-outline-secondary" style=" border-radius: 25px;" href="/Groups/Index/"> <i class="bi bi-skip-backward"></i> Show all groups</a>
+}

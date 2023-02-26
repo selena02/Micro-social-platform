@@ -1,0 +1,61 @@
+﻿@* Motorul de cautare *@
+<form method="GET">
+    <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="Search topics or keywords" name="search"
+               value="@ViewBag.SearchString">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+    </div>
+
+</form>
+@if (ViewBag.Message != null)
+{
+    <div class="alert alert-success" role="alert">
+        @ViewBag.Message
+    </div>
+
+}
+@foreach (var user in ViewBag.Users)
+{
+    <div class="card">
+        <div class="card-body">
+            <h3 class="card-title py-3 px-3 rounded-2" style="font-family: 'Trocchi', serif;"><i class="bi bi-person-fill"></i> @user.UserName</h3>
+            <div class="d-flex flex-row">
+                <br/><br/>
+                <form method="get" action=/Profiles/Show/@user.Id>
+                    <button class="btn btn-outline-primary" style=" border-radius: 25px;"><i class="bi bi-eye"></i> See profile</button>
+                </form>
+            @if (user.Id != ViewBag.UserCurent)
+            {
+                <form method="post" action=/Friends/Add_friend/@user.Id>
+                        <button class="btn btn-outline-success" type="submit" style=" border-radius: 25px;"><i class="bi bi-plus-circle"></i> Send friend request</button>
+                </form>
+            <form method="post" action=/Friends/Remove_friend/@user.Id>
+                        <button class="btn btn-outline-danger" style=" border-radius: 25px;" type="submit"><i class="bi bi-person-x"></i> Remove friend</button>
+            </form>
+            }
+            </div>
+            </div>
+        </div>
+}
+<div>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            <li class="page-item">
+                <a class="page-link" href="@ViewBag.PaginationBaseUrl=1" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+
+            @for (int i = 1; i <= ViewBag.lastPage; i++)
+            {
+                <li class="page-item"> <a class="page-link" href="@ViewBag.PaginationBaseUrl=@i">@(i)</a> </li>
+            }
+
+            <li class="page-item">
+                <a class="page-link" href="@ViewBag.PaginationBaseUrl=@(ViewBag.lastPage)" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    </di

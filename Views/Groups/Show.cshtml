@@ -1,0 +1,125 @@
+﻿@model Micro_social_platform.Models.Group
+@if (ViewBag.EsteAdmin)
+{
+    <div class="d-flex flex-row ">
+        <a class="btn btn-outline-info" style=" border-radius: 25px;" href="/Groups/Edit/@Model.GroupId">Edit group details</a>
+        <a class="btn btn-outline-info" style=" border-radius: 25px;" href="/UserGroups/Show/@Model.GroupId">Edit group members</a>
+    <form method="post" action="/Groups/Delete/@Model.GroupId">
+            <button class="btn btn-outline-danger" style=" border-radius: 25px;" type="submit">Delete this group</button>
+    </form>
+    </div>
+}
+<br />
+<br />
+<div class="d-flex justify-content-center">
+
+    @if (ViewBag.EsteAdmin == false)
+    {
+        <a class="btn btn-outline-secondary" style=" border-radius: 25px;" href="/Groups/Index/"> <i class="bi bi-skip-backward"></i> Show all groups</a>
+
+        <form method="post" action="/UserGroups/RemoveUserGroup/@Model.GroupId">
+            <button class="btn btn-outline-danger" style=" border-radius: 25px;" type="submit">Leave Group</button>
+        </form>
+    }
+</div>
+<br />
+@if (ViewBag.Msg != null)
+{
+    <div class="alert alert-success" role="alert">
+        @ViewBag.Msg
+    </div>
+}
+<div class="card">
+
+    <center>
+        <h3 class="card-title py-3 px-3 rounded-2" style="font-family: 'Trocchi', serif;"><i class="bi bi-people-fill"></i>@Model.Name</h3>
+        <h5 style="font-family: 'Trocchi', serif;">@Model.Description</h5>
+    </center>
+
+</div>
+<br />
+<br />
+
+@foreach (var message in Model.GroupMessages)
+{
+<div class="container">
+    <div class="row">
+        <div class="col-md-2"></div>
+
+        <div class="col-md-8">
+
+            <div>
+                <p>@message.Content</p>
+                <small>@message.Date</small>
+                <strong><i class="bi bi-person"></i>@message.User.UserName</strong> 
+            </div>
+            <br>
+            @if((message.UserId!=null && ViewBag.UserCurent != null && ViewBag.EsteAdmin != null) || ViewBag.EsteAdmin) {
+            @if(message.UserId==ViewBag.UserCurent || ViewBag.EsteAdmin)
+            {
+            <div class="d-flex">
+
+                <div>
+
+                                <a class="btn btn-outline-primary" style=" border-radius: 25px;" href="/GroupMessages/Edit/@message.MessageId"><i class="bi bi-pencil-square"></i>Editeaza</a>
+
+                </div>
+
+                <div>
+
+                    <form method="post" action="/GroupMessages/Delete/@message.MessageId">
+
+                                    <button class="btn btn-outline-danger" style=" border-radius: 25px;" type="submit"><i class="bi bi-trash"></i>Sterge</button>
+
+                    </form>
+
+                </div>
+
+            </div>
+            }
+            }
+            <br />
+
+        </div>
+
+        <div class="col-md-2"></div>
+
+    </div>
+
+</div>
+}
+<div class="container">
+
+    <div class="row">
+
+        <div class="col-md-2"></div>
+
+        <div class="col-md-8">
+
+            <div class="card">
+
+                <form method="post" action=/Groups/Show/@Model.GroupId>
+
+                    <div class="card-body">
+
+                        <input type="hidden" name="GroupId" value="@Model.GroupId" />
+
+                        <label>Write your post</label>
+                        <textarea class="form-control" name="Content"></textarea>
+                        <br />
+                         @Html.ValidationMessage("Content", null, new { @class ="text-danger" })
+                         <br />
+                        <button class="btn btn-success " type="submit">Upload your post</button>
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-2"></div>
+
+    </div>
+
+</div> 

@@ -1,0 +1,15 @@
+﻿@if (ViewBag.Msg != null)
+{
+    <div class="alert alert-success" role="alert">
+        @ViewBag.Msg
+    </div>
+}
+@foreach (var friend in ViewBag.Friends)
+{
+    <div class="card text-center" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">@friend.ApplicationUser.UserName</h5>
+            <a href="/Friends/Remove_friend/@friend.Id" class="btn btn-primary">Remove friend</a>
+        </div>
+    </div>
+}

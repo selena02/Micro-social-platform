@@ -1,0 +1,64 @@
+﻿@if (ViewBag.EsteAdmin)
+{
+    <a class="btn btn-outline-success mt-3 mb-3" style=" border-radius: 25px;" href="/Groups/New">Create a new group</a>
+}
+@model Micro_social_platform.Models.UserGroup
+@if (ViewBag.Message != null)
+{
+    <div class="alert alert-success" role="alert">
+        @ViewBag.Message
+    </div>
+
+}
+
+@foreach (var group in ViewBag.Groups)
+{
+    <div class="card" style="background-color:#f5f6fa">
+        <div class="card-body">
+            <center>
+             <h3 class="card-title py-3 px-3 rounded-2"  style="font-family: 'Trocchi', serif;"><i class="bi bi-people-fill"></i>@group.Name</h3>
+            <h5 style="font-family: 'Trocchi', serif;">@group.Description</h5>
+            </center>
+            <div class="d-flex flex-row justify-content-between mt-5 ">
+                @if (ViewBag.EsteAdmin == true)
+                {
+                    <a class="btn btn-outline-info" style=" border-radius: 25px;" href="/Groups/Show/@group.GroupId">Manage group</a>
+                }
+                else
+                {
+
+                    <form method="post" action="/UserGroups/AddUserGroup/@group.GroupId">
+
+                        <button class="btn btn-outline-secondary" style=" border-radius: 25px;" type="submit"><i class="bi bi-journal-plus"></i> JoinGroup</button>
+
+                    </form>
+                    <a class="btn btn-outline-secondary" style=" border-radius: 25px;" href="/Groups/Show/@group.GroupId"><i class="bi bi-search"></i> Find out more</a>
+                }
+           </div>
+        </div>
+    </div>
+    <br />
+    <br />
+}
+<div>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            <li class="page-item">
+                <a class="page-link" href="@ViewBag.PaginationBaseUrl=1" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+
+            @for (int i = 1; i <= ViewBag.lastPage; i++)
+            {
+                <li class="page-item"> <a class="page-link" href="@ViewBag.PaginationBaseUrl=@i">@(i)</a> </li>
+            }
+            
+            <li class="page-item">
+                <a class="page-link" href="@ViewBag.PaginationBaseUrl=@(ViewBag.lastPage)" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div

@@ -1,0 +1,37 @@
+﻿@model Micro_social_platform.Models.Friend
+@{
+    ViewBag.Title = "Friend Request";
+}
+@if (ViewBag.Message != null)
+{
+    <div class="alert alert-success" role="alert">
+        @ViewBag.Message
+    </div>
+}
+@foreach (var friend in ViewBag.Friends)
+{
+    <div class="card" style="background-color:#f5f6fa">
+        <div class="card-body">
+            <h3 class="card-title py-3 px-3 rounded-2" style="font-family: 'Trocchi', serif;">@friend.User_sender_name</h3>
+            <div class="d-flex flex-row justify-content-between mt-5 ">
+                <form method="post" action="/Friends/Accept/@friend.Id">
+
+                    <button class="btn btn-outline-success" style=" border-radius: 25px;" type="submit">Accept</button>
+
+                </form>
+                <form method="post" action="/Friends/Refuse/@friend.Id">
+
+                    <button class="btn btn-outline-danger" style=" border-radius: 25px;" type="submit">Refuse</button>
+                </form>
+       
+           </div>
+        </div>
+    </div>
+    <br />
+    <br />
+}
+@if(ViewBag.Afisare==false)
+{
+    <br />
+    <h3 class="titlu">No new friend requests to show</h3>
+}

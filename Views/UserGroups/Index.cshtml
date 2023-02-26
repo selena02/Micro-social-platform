@@ -1,0 +1,31 @@
+﻿@model Micro_social_platform.Models.Group
+@if (ViewBag.UserGroupId != null)
+{
+    <center>
+    <div class="jumbotron">
+        <h1 class="display-4" style="font-family: 'Trocchi', serif;">Welcome fellow traveller!</h1>
+        <br />
+        <br />
+        <h2 class="lead" style="font-family: 'Trocchi', serif;">You are now part of the group. Communicate with people alike and let the adventure begin</h2>
+        <br />
+    <hr class="my-4">
+    <p style="color:brown">Indecent behaviour will not be tolareted.</p>
+    <p class="lead">
+                <a class="btn btn-outline-success" style=" border-radius: 25px;" href="/Groups/Show/@ViewBag.UserGroupId" role="button">See group messages</a>
+    </p>
+</div>
+    </center>
+}
+else
+{
+    <div class="jumbotron">
+        <h1 class="display-4">You are already part of this group!</h1>
+        <hr class="my-4">
+        <p class="lead">
+            <a class="btn btn-outline-success" style=" border-radius: 25px;" href="/Groups/Show/@ViewBag.UserGroupId2" role="button">See group messages</a>
+        </p>
+    </div>
+
+}
+
+
